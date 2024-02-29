@@ -39,7 +39,9 @@ public class AuthController {
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
         String token = jwtProvider.generateToken(authentication);
-        AuthResponse authResponse = new AuthResponse(token, "Sign up successes");
+        AuthResponse authResponse = new AuthResponse();
+        authResponse.setJwt(token);
+        authResponse.setMessage("Sign up successes");
 
         return new ResponseEntity<AuthResponse>(authResponse, HttpStatus.OK);
     }
@@ -52,7 +54,9 @@ public class AuthController {
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
         String token = jwtProvider.generateToken(authentication);
-        AuthResponse authResponse = new AuthResponse(token, "Login successful");
+        AuthResponse authResponse = new AuthResponse();
+        authResponse.setJwt(token);
+        authResponse.setMessage("Login successful");
 
         return new ResponseEntity<AuthResponse>(authResponse, HttpStatus.OK);
     }
@@ -63,7 +67,7 @@ public class AuthController {
             throw new BadCredentialsException("Invalid username");
         }
 
-        if (passwordEncoder.matches(password, userDetails.getPassword())) {
+        if (!passwordEncoder.matches(password, userDetails.getPassword())) {
             throw new BadCredentialsException("Invalid password");
         }
 

@@ -12,6 +12,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.PrePersist;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -62,4 +63,9 @@ public class User {
 
 
     private LocalDateTime createdAt;
+
+    @PrePersist
+    private void init() {
+        createdAt = LocalDateTime.now();
+    }
 }
