@@ -4,7 +4,8 @@ import com.example.ecommerce.model.Address;
 import com.example.ecommerce.model.Order;
 import com.example.ecommerce.model.User;
 import com.example.ecommerce.model.exception.OrderException;
-import com.example.ecommerce.service.CartItemService;
+import com.example.ecommerce.repository.CartRepository;
+import com.example.ecommerce.service.CartService;
 import com.example.ecommerce.service.OrderService;
 import com.example.ecommerce.service.ProductService;
 import lombok.RequiredArgsConstructor;
@@ -18,7 +19,7 @@ import java.util.List;
 public class OrderServiceImpl implements OrderService {
 
     private final CartRepository cartRepository;
-    private final CartItemService cartItemService;
+    private final CartService cartItemService;
     private final ProductService productService;
 
     @Override
