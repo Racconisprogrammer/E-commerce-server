@@ -1,6 +1,7 @@
 package com.example.ecommerce.service.impl;
 
 
+import com.example.ecommerce.config.JwtProvider;
 import com.example.ecommerce.model.User;
 import com.example.ecommerce.model.exception.UserException;
 import com.example.ecommerce.repository.UserRepository;
@@ -18,12 +19,19 @@ public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
+    private final JwtProvider jwtProvider;
 
 
     @SneakyThrows
     @Override
-    public Optional<User> findUserById(Long userId) {
-        return userRepository.findById(userId);
+    public User findUserById(Long userId) {
+        Optional<User> user = userRepository.findById(userId);
+
+        if (user.isPresent()) {
+            return user.get();
+        }
+
+        throw new UserException("Not found user with id " + userId);
     }
 
     @SneakyThrows
@@ -34,8 +42,14 @@ public class UserServiceImpl implements UserService {
 
     @SneakyThrows
     @Override
-    public Optional<User> findUserProfileByJwt(String jwt) {
-        return null;
+    public User findUserProfileByJwt(String jwt) {
+        String email = jwtProvider.getEmailFromToken(jwt);
+        Optional<User> user = userRepository.findByEmail(email);
+
+        if (user.isPresent()) {
+            return user.get();
+        }
+        throw new UserException("User not found with jwt " + jwt);
     }
 
     @SneakyThrows

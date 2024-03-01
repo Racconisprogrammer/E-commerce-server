@@ -16,6 +16,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -38,6 +39,9 @@ public class Product {
     private String description;
 
     private int price;
+
+    @Column(name = "discount_price")
+    private int discountPrice;
 
     @Column(name = "discount_percent")
     private int discountPercent;
@@ -71,6 +75,9 @@ public class Product {
     @ManyToOne
     @JoinColumn(name = "category_id")
     private Category category;
+
+    private LocalDateTime createdAt;
+
 
 
 

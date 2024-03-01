@@ -7,11 +7,11 @@ import java.util.Optional;
 
 public interface UserService {
 
-    Optional<User> findUserById(Long userId) throws UserException;
+    User findUserById(Long userId) throws UserException;
 
     Optional<User> findUserByEmail(String email) throws UserException;
 
-    Optional<User> findUserProfileByJwt(String jwt) throws UserException;
+    User findUserProfileByJwt(String jwt) throws UserException;
 
     User createUser(User user);
 }
