@@ -4,6 +4,7 @@ import com.example.ecommerce.model.Address;
 import com.example.ecommerce.model.Order;
 import com.example.ecommerce.model.User;
 import com.example.ecommerce.model.exception.OrderException;
+import com.example.ecommerce.service.CartItemService;
 import com.example.ecommerce.service.OrderService;
 import com.example.ecommerce.service.ProductService;
 import lombok.RequiredArgsConstructor;
