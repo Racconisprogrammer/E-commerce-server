@@ -11,3 +11,6 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: true
+
+RAZORPAY_PUBLISHABLE_ID: "rzp_test_Q0QTYcgPygZd5V"
+RAZORPAY_SECRET_KEY: "DCwc8GO9rqJBEPr7SJaiPXxb"

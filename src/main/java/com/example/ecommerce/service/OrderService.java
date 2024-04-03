@@ -21,7 +21,7 @@ public interface OrderService {
 
     Order shippedOrder(Long orderId) throws OrderException;
 
-    Order dilveredOrder(Long orderId) throws OrderException;
+    Order deliveredOrder(Long orderId) throws OrderException;
 
     Order canceledOrder(Long orderId) throws OrderException;
 

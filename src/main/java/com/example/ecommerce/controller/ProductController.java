@@ -69,7 +69,7 @@ public class ProductController {
 //            @RequestParam String q
 //    ) throws ProductException {
 //
-////        List<Product> products = productService.searchProduct(q);
+//        List<Product> products = productService.searchProduct(q);
 //        List<Product> products = productService.findProductById(1L);
 //
 //        return new ResponseEntity<>(products, HttpStatus.OK);
