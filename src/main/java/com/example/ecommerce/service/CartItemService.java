@@ -24,7 +24,7 @@ public interface CartItemService {
             Long userId
     );
 
-    void removeCartItem(
+    CartItem removeCartItem(
             Long userId,
             Long cartItemId
             ) throws CartItemException, UserException;

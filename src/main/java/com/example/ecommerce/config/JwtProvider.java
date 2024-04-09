@@ -17,7 +17,7 @@ public class JwtProvider {
 
     public String generateToken(Authentication authentication) {
         Instant validity = Instant.now()
-                .plus(1, ChronoUnit.HOURS);
+                .plus(4, ChronoUnit.HOURS);
         String jwt = Jwts.builder()
                 .issuedAt(new Date())
                 .expiration(Date.from(validity))

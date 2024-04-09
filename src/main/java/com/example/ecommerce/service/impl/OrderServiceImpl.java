@@ -29,11 +29,9 @@ import java.util.List;
 @RequiredArgsConstructor
 public class OrderServiceImpl implements OrderService {
 
-    private final CartRepository cartRepository;
     private final CartService cartService;
     private final OrderRepository orderRepository;
     private final UserRepository userRepository;
-    private final OrderItemService orderItemService;
     private final OrderItemRepository orderItemRepository;
     private final AddressRepository addressRepository;
 

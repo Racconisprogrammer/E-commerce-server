@@ -55,10 +55,21 @@ public class Product {
     @Column(name = "color")
     private String color;
 
+    @Column(name = "details")
+    private String details;
+
     @Embedded
     @ElementCollection
     @Column(name = "sizes")
     private Set<Size> sizes = new HashSet<>();
+
+    @Embedded
+    @ElementCollection
+    @Column(name = "highlights")
+    private Set<Highlights> highlights = new HashSet<>();
+
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Images> images = new ArrayList<>();
 
     @Column(name = "image_url")
     private String imageUrl;

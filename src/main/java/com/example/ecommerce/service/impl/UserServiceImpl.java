@@ -2,9 +2,11 @@ package com.example.ecommerce.service.impl;
 
 
 import com.example.ecommerce.config.JwtProvider;
+import com.example.ecommerce.model.Cart;
 import com.example.ecommerce.model.User;
 import com.example.ecommerce.model.exception.UserException;
 import com.example.ecommerce.repository.UserRepository;
+import com.example.ecommerce.service.CartService;
 import com.example.ecommerce.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;

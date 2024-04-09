@@ -6,13 +6,9 @@ import com.example.ecommerce.model.CartItem;
 import com.example.ecommerce.model.Product;
 import com.example.ecommerce.model.User;
 import com.example.ecommerce.model.exception.CartItemException;
-import com.example.ecommerce.model.exception.ProductException;
 import com.example.ecommerce.model.exception.UserException;
-import com.example.ecommerce.model.request.AddItemRequest;
 import com.example.ecommerce.repository.CartItemRepository;
-import com.example.ecommerce.repository.CartRepository;
 import com.example.ecommerce.service.CartItemService;
-import com.example.ecommerce.service.CartService;
 import com.example.ecommerce.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -26,7 +22,7 @@ public class CartItemServiceImpl implements CartItemService {
 
     private final CartItemRepository cartItemRepository;
     private final UserService userService;
-    private final CartRepository cartRepository;
+
 
 
     @Override
@@ -43,7 +39,7 @@ public class CartItemServiceImpl implements CartItemService {
     @Override
     public CartItem updateCartItem(Long userId, Long id, CartItem cartItem) throws CartItemException, UserException {
         CartItem item = findCartItemById(id);
-        User user = userService.findUserById(cartItem.getUserId());
+        User user = userService.findUserById(item.getUserId());
 
         if (user.getId().equals(userId)) {
             item.setQuantity(cartItem.getQuantity());
@@ -62,7 +58,7 @@ public class CartItemServiceImpl implements CartItemService {
     }
 
     @Override
-    public void removeCartItem(Long userId, Long cartItemId) throws CartItemException, UserException {
+    public CartItem removeCartItem(Long userId, Long cartItemId) throws CartItemException, UserException {
         CartItem cartItem = findCartItemById(cartItemId);
         User user = userService.findUserById(cartItem.getUserId());
         User reqUser = userService.findUserById(userId);
@@ -74,6 +70,7 @@ public class CartItemServiceImpl implements CartItemService {
             throw new UserException("You can't remove another users item");
         }
 
+        return cartItem;
     }
 
     @Override

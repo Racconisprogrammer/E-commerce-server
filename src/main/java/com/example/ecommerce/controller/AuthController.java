@@ -1,10 +1,12 @@
 package com.example.ecommerce.controller;
 
 import com.example.ecommerce.config.JwtProvider;
+import com.example.ecommerce.model.Cart;
 import com.example.ecommerce.model.User;
 import com.example.ecommerce.model.request.LoginRequest;
 import com.example.ecommerce.model.exception.UserException;
 import com.example.ecommerce.model.response.AuthResponse;
+import com.example.ecommerce.service.CartService;
 import com.example.ecommerce.service.UserService;
 import com.example.ecommerce.service.impl.CustomUserDetailsServiceImpl;
 import lombok.RequiredArgsConstructor;
@@ -29,6 +31,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class AuthController {
 
     private final UserService userService;
+    private final CartService cartService;
     private final JwtProvider jwtProvider;
     private final PasswordEncoder passwordEncoder;
     private final CustomUserDetailsServiceImpl customUserDetailsService;
@@ -36,6 +39,8 @@ public class AuthController {
     @PostMapping("/signup")
     public ResponseEntity<AuthResponse> createUserHandler(@RequestBody User user) {
         User user1 = userService.createUser(user);
+        cartService.createCart(user1);
+
         Authentication authentication = new UsernamePasswordAuthenticationToken(user1.getEmail(), user1.getPassword());
         SecurityContextHolder.getContext().setAuthentication(authentication);
 

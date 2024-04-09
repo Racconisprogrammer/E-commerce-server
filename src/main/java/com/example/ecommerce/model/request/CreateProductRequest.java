@@ -36,11 +36,11 @@ public class CreateProductRequest {
 
     private String imageUrl;
 
-    private String topLevelCategory;
+    private String topLavelCategory;
 
-    private String secondLevelCategory;
+    private String secondLavelCategory;
 
-    private String thirdLevelCategory;
+    private String thirdLavelCategory;
 
 
 

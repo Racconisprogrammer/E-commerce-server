@@ -32,36 +32,36 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Product createProduct(CreateProductRequest productRequest) {
-        Category topLevel = categoryRepository.findByName(productRequest.getTopLevelCategory());
+        Category topLevel = categoryRepository.findByName(productRequest.getTopLavelCategory());
 
         if (topLevel == null) {
             Category topLevelCategory = new Category();
-            topLevelCategory.setName(productRequest.getTopLevelCategory());
+            topLevelCategory.setName(productRequest.getTopLavelCategory());
             topLevelCategory.setLevel(1);
 
             topLevel = categoryRepository.save(topLevelCategory);
         }
         Category secondLevel = categoryRepository.findByNameAndParent(
-                productRequest.getSecondLevelCategory(),
-                topLevel.getName()
-        );
+                productRequest.getSecondLavelCategory(),
+                topLevel.getName());
+
         if (secondLevel == null) {
             Category secondLevelCategory = new Category();
-            secondLevelCategory.setName(productRequest.getSecondLevelCategory());
+            secondLevelCategory.setName(productRequest.getSecondLavelCategory());
             secondLevelCategory.setParentCategory(topLevel);
             secondLevelCategory.setLevel(2);
 
             secondLevel = categoryRepository.save(secondLevelCategory);
         }
         Category thirdLevel = categoryRepository
-                .findByNameAndParent(productRequest.getSecondLevelCategory(), secondLevel.getName());
+                .findByNameAndParent(productRequest.getSecondLavelCategory(), secondLevel.getName());
         if (thirdLevel == null) {
             Category thirdLevelCategory = new Category();
-            thirdLevelCategory.setName(productRequest.getThirdLevelCategory());
+            thirdLevelCategory.setName(productRequest.getThirdLavelCategory());
             thirdLevelCategory.setParentCategory(secondLevel);
             thirdLevelCategory.setLevel(3);
 
-            secondLevel = categoryRepository.save(thirdLevelCategory);
+            thirdLevel = categoryRepository.save(thirdLevelCategory);
         }
         Product product = new Product();
         product.setTitle(productRequest.getTitle());
