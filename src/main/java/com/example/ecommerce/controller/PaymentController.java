@@ -77,8 +77,10 @@ public class PaymentController {
     }
 
     @GetMapping("/payments")
-    public ResponseEntity<ApiResponse> redirect(@RequestParam(name = "payment_id") String paymentId,
-                                                @RequestParam(name = "order_id") Long orderId) throws OrderException, RazorpayException {
+    public ResponseEntity<ApiResponse> redirect(
+            @RequestParam(name = "payment_id") String paymentId,
+            @RequestParam(name = "order_id") Long orderId
+    ) throws OrderException, RazorpayException {
         Order order = orderService.findOrderById(orderId);
         RazorpayClient razorpayClient = new RazorpayClient(apiKey, secretKey);
 
