@@ -1,17 +1,17 @@
 --liquibase formatted sql
 --changeset admin:sample1_0
-DROP TABLE category;
-DROP TABLE address;
-DROP TABLE cart;
-DROP TABLE cart_item;
-DROP TABLE images;
-DROP TABLE order_item;
-DROP TABLE orders;
-DROP TABLE product;
-DROP TABLE rating;
-DROP TABLE review;
-DROP TABLE user_payment_information;
-DROP TABLE user;
+DROP TABLE if exists category;
+DROP TABLE if exists address;
+DROP TABLE if exists cart;
+DROP TABLE if exists cart_item;
+DROP TABLE if exists images;
+DROP TABLE if exists order_item;
+DROP TABLE if exists orders;
+DROP TABLE if exists product;
+DROP TABLE if exists rating;
+DROP TABLE if exists review;
+DROP TABLE if exists user_payment_information;
+DROP TABLE if exists user;
 
 --changeset admin:sample1_1
 CREATE TABLE IF NOT EXISTS category
@@ -57,7 +57,7 @@ CREATE TABLE IF NOT EXISTS images
     CONSTRAINT fk_images_product_id FOREIGN KEY (product_id) REFERENCES product (id)
 );
 
-
+--changeset admin:sample1_4
 CREATE TABLE IF NOT EXISTS user
 (
     id         BIGINT AUTO_INCREMENT PRIMARY KEY,
@@ -70,6 +70,7 @@ CREATE TABLE IF NOT EXISTS user
     role       VARCHAR(255) NULL
 );
 
+--changeset admin:sample1_5
 CREATE TABLE IF NOT EXISTS address
 (
     id             BIGINT AUTO_INCREMENT PRIMARY KEY,
@@ -84,6 +85,7 @@ CREATE TABLE IF NOT EXISTS address
     CONSTRAINT fk_address_user_id FOREIGN KEY (user_id) REFERENCES user (id)
 );
 
+--changeset admin:sample1_6
 CREATE TABLE IF NOT EXISTS cart
 (
     id                     BIGINT AUTO_INCREMENT PRIMARY KEY,
@@ -96,6 +98,7 @@ CREATE TABLE IF NOT EXISTS cart
     CONSTRAINT fk_cart_user_id FOREIGN KEY (user_id) REFERENCES user (id)
 );
 
+--changeset admin:sample1_7
 CREATE TABLE IF NOT EXISTS cart_item
 (
     id               BIGINT AUTO_INCREMENT PRIMARY KEY,
@@ -110,6 +113,8 @@ CREATE TABLE IF NOT EXISTS cart_item
     CONSTRAINT fk_cart_item_product_id FOREIGN KEY (product_id) REFERENCES product (id)
 );
 
+
+--changeset admin:sample1_8
 CREATE TABLE IF NOT EXISTS orders
 (
     id                                 BIGINT AUTO_INCREMENT PRIMARY KEY,
@@ -136,6 +141,7 @@ CREATE TABLE IF NOT EXISTS orders
     CONSTRAINT fk_orders_shipping_address_id FOREIGN KEY (shipping_address_id) REFERENCES address (id)
 );
 
+--changeset admin:sample1_9
 CREATE TABLE IF NOT EXISTS order_item
 (
     id               BIGINT AUTO_INCREMENT PRIMARY KEY,
@@ -151,6 +157,7 @@ CREATE TABLE IF NOT EXISTS order_item
     CONSTRAINT fk_order_item_order_id FOREIGN KEY (order_id) REFERENCES orders (id)
 );
 
+--changeset admin:sample1_10
 CREATE TABLE IF NOT EXISTS rating
 (
     id         BIGINT AUTO_INCREMENT PRIMARY KEY,
@@ -162,6 +169,7 @@ CREATE TABLE IF NOT EXISTS rating
     CONSTRAINT fk_rating_user_id FOREIGN KEY (user_id) REFERENCES user (id)
 );
 
+--changeset admin:sample1_11
 CREATE TABLE IF NOT EXISTS review
 (
     id         BIGINT AUTO_INCREMENT PRIMARY KEY,
@@ -173,6 +181,7 @@ CREATE TABLE IF NOT EXISTS review
     CONSTRAINT fk_review_product_id FOREIGN KEY (product_id) REFERENCES product (id)
 );
 
+--changeset admin:sample1_12
 CREATE TABLE IF NOT EXISTS user_payment_information
 (
     user_id         BIGINT       NOT NULL,
@@ -182,191 +191,3 @@ CREATE TABLE IF NOT EXISTS user_payment_information
     expiration_date DATETIME     NULL,
     CONSTRAINT fk_user_payment_information_user_id FOREIGN KEY (user_id) REFERENCES user (id)
 );
-
-
-
-
-# create table if not exists category
-# (
-#     id                 bigint auto_increment
-#         primary key,
-#     level              int         not null,
-#     name               varchar(50) not null,
-#     parent_category_id bigint      null,
-#     constraint foreign key (parent_category_id) references category (id)
-# );
-#
-# create table if not exists product
-# (
-#     id               bigint auto_increment
-#         primary key,
-#     brand            varchar(255)  null,
-#     color            varchar(255)  null,
-#     created_at       datetime(6)   null,
-#     description      varchar(1500) null,
-#     details          varchar(1500) null,
-#     discount_percent int           null,
-#     discount_price   int           null,
-#     num_ratings      int           null,
-#     price            int           not null,
-#     quantity         int           null,
-#     title            varchar(255)  null,
-#     category_id      bigint        null,
-#     preview_image_id bigint        null,
-#     highlights       varchar(1500) null,
-#     constraint foreign key (category_id) references category (id)
-# );
-#
-# create table if not exists images
-# (
-#     id                 bigint auto_increment
-#         primary key,
-#     bytes              longblob     null,
-#     content_type       varchar(255) null,
-#     is_preview_image   bit          not null,
-#     name               varchar(255) null,
-#     original_file_name varchar(255) null,
-#     size               bigint       null,
-#     product_id         bigint       null,
-#     constraint foreign key (product_id) references product (id)
-# );
-#
-# create table if not exists product_highlights
-# (
-#     product_id bigint       not null,
-#     name       varchar(255) null,
-#     constraint foreign key (product_id) references product (id)
-# );
-#
-# create table if not exists user
-# (
-#     id         bigint auto_increment
-#         primary key,
-#     created_at datetime(6)  null,
-#     email      varchar(255) null,
-#     first_name varchar(255) null,
-#     last_name  varchar(255) null,
-#     mobile     varchar(255) null,
-#     password   varchar(255) null,
-#     role       varchar(255) null
-# );
-#
-# create table if not exists address
-# (
-#     id             bigint auto_increment
-#         primary key,
-#     city           varchar(255) null,
-#     first_name     varchar(255) null,
-#     last_name      varchar(255) null,
-#     mobile         varchar(255) null,
-#     state          varchar(255) null,
-#     street_address varchar(255) null,
-#     zip_code       varchar(255) null,
-#     user_id        bigint       null,
-#     constraint foreign key (user_id) references user (id)
-# );
-#
-# create table if not exists cart
-# (
-#     id                     bigint auto_increment
-#         primary key,
-#     discounted             int    not null,
-#     total_discounted_price int    not null,
-#     total_item             int    null,
-#     total_price            double null,
-#     user_id                bigint not null,
-#     constraint unique (user_id),
-#     constraint foreign key (user_id) references user (id)
-# );
-#
-# create table if not exists cart_item
-# (
-#     id               bigint auto_increment
-#         primary key,
-#     discounted_price int          null,
-#     price            int          null,
-#     quantity         int          not null,
-#     size             varchar(255) null,
-#     user_id          bigint       null,
-#     cart_id          bigint       null,
-#     product_id       bigint       null,
-#     constraint foreign key (cart_id) references cart (id),
-#     constraint foreign key (product_id) references product (id)
-# );
-#
-# create table if not exists orders
-# (
-#     id                                 bigint auto_increment
-#         primary key,
-#     create_at                          datetime(6)  null,
-#     delivery_date                      datetime(6)  null,
-#     discounted                         int          null,
-#     order_date                         datetime(6)  null,
-#     order_id                           varchar(255) null,
-#     order_status                       varchar(255) null,
-#     payment_id                         varchar(255) null,
-#     payment_method                     varchar(255) null,
-#     razorpay_payment_id                varchar(255) null,
-#     razorpay_payment_link_id           varchar(255) null,
-#     razorpay_payment_link_reference_id varchar(255) null,
-#     razorpay_payment_link_status       varchar(255) null,
-#     status                             varchar(255) null,
-#     total_discounted_price             int          null,
-#     total_item                         int          not null,
-#     total_price                        double       not null,
-#     shipping_address_id                bigint       null,
-#     user_id                            bigint       null,
-#     constraint unique (shipping_address_id),
-#     constraint foreign key (user_id) references user (id),
-#     constraint foreign key (shipping_address_id) references address (id)
-# );
-#
-# create table if not exists order_item
-# (
-#     id               bigint auto_increment
-#         primary key,
-#     delivery_date    datetime(6)  null,
-#     discounted_price int          null,
-#     price            int          null,
-#     quantity         int          not null,
-#     size             varchar(255) null,
-#     user_id          bigint       null,
-#     order_id         bigint       null,
-#     product_id       bigint       null,
-#     constraint foreign key (product_id) references product (id),
-#     constraint foreign key (order_id) references orders (id)
-# );
-#
-# create table if not exists rating
-# (
-#     id         bigint auto_increment
-#         primary key,
-#     created_at datetime(6) null,
-#     rating     bigint      null,
-#     product_id bigint      not null,
-#     user_id    bigint      not null,
-#     constraint foreign key (product_id) references product (id),
-#     constraint foreign key (user_id) references user (id)
-# );
-#
-# create table if not exists review
-# (
-#     id         bigint auto_increment
-#         primary key,
-#     create_at  datetime(6)  null,
-#     review     varchar(255) null,
-#     product_id bigint       null,
-#     user_id    bigint       null,
-#     constraint foreign key (user_id) references user (id),
-#     constraint foreign key (product_id) references product (id)
-# );
-#
-# create table if not exists user_payment_information
-# (
-#     user_id         bigint       not null,
-#     card_number     varchar(255) null,
-#     cardholder_name varchar(255) null,
-#     cvv             varchar(255) null,
-#     expiration_date date         null,
-#     constraint foreign key (user_id) references user (id)
-# );
