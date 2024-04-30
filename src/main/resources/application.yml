@@ -5,7 +5,7 @@ spring:
 #  config:
 #    import: optional:file:.env[.properties]
   datasource:
-    url: jdbc:mysql://${MYSQLHOST:localhost}:${MYSQLPORT:3306}/${MYSQLDATABASE:ecommerce}
+    url: jdbc:mysql://${MYSQLHOST:localhost}:${MYSQLPORT:3306}/${MYSQLDATABASE:ecommerce}?useSSL=false&useLegacyDatetimeCode=false&allowPublicKeyRetrieval=true
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
     password: ZTanSQQDDWEfTSaJcxXMAlnQHtZVSjpD
