@@ -52,7 +52,7 @@ public class AdminProductController {
 
 
     @PostMapping("/")
-    public ResponseEntity<Product> createProduct(
+    public ResponseEntity<ApiResponse> createProduct(
             @ModelAttribute CreateProductRequest request,
             @RequestPart("file1") MultipartFile file1,
             @RequestPart("file2") MultipartFile file2,
@@ -61,8 +61,12 @@ public class AdminProductController {
             @RequestPart("file5") MultipartFile file5
     ) throws IOException {
 
-        Product product = productService.createProduct(request, file1, file2, file3, file4, file5);
-        return new ResponseEntity<>(product, HttpStatus.CREATED);
+        productService.createProduct(request, file1, file2, file3, file4, file5);
+        ApiResponse apiResponse = new ApiResponse();
+        apiResponse.setStatus(true);
+        apiResponse.setMessage("Created product");
+
+        return new ResponseEntity<>(apiResponse, HttpStatus.CREATED);
     }
 
     @DeleteMapping("/{productId}/delete")
