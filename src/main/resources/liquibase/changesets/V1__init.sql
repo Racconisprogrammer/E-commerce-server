@@ -1,6 +1,8 @@
 --liquibase formatted sql
 --changeset admin:sample1_0
 DROP TABLE if exists category;
+DROP TABLE if exists DATABASECHANGELOG;
+DROP TABLE if exists DATABASECHANGELOGLOCK;
 DROP TABLE if exists address;
 DROP TABLE if exists cart;
 DROP TABLE if exists cart_item;
