@@ -1,4 +1,18 @@
 --liquibase formatted sql
+--changeset admin:sample1_0
+DROP TABLE category;
+DROP TABLE address;
+DROP TABLE cart;
+DROP TABLE cart_item;
+DROP TABLE images;
+DROP TABLE order_item;
+DROP TABLE orders;
+DROP TABLE product;
+DROP TABLE rating;
+DROP TABLE review;
+DROP TABLE user_payment_information;
+DROP TABLE user;
+
 --changeset admin:sample1_1
 CREATE TABLE IF NOT EXISTS category
 (
@@ -41,14 +55,6 @@ CREATE TABLE IF NOT EXISTS images
     size               BIGINT       NULL,
     product_id         BIGINT       NULL,
     CONSTRAINT fk_images_product_id FOREIGN KEY (product_id) REFERENCES product (id)
-);
-
---changeset admin:sample1_4
-CREATE TABLE IF NOT EXISTS product_highlights
-(
-    product_id BIGINT       NOT NULL,
-    name       VARCHAR(255) NULL,
-    CONSTRAINT fk_product_highlights_product_id FOREIGN KEY (product_id) REFERENCES product (id)
 );
 
 
