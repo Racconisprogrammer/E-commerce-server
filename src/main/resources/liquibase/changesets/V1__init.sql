@@ -6,7 +6,6 @@ CREATE TABLE IF NOT EXISTS category
     parent_category_id BIGINT      NULL
 );
 
-ALTER TABLE category ADD FOREIGN KEY (parent_category_id) REFERENCES category (id);
 
 
 CREATE TABLE IF NOT EXISTS product
