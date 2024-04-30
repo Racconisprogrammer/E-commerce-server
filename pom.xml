@@ -19,7 +19,6 @@
         <lombok.version>1.18.30</lombok.version>
         <razorpay.version>1.4.6</razorpay.version>
         <liquibase.version>4.27.0</liquibase.version>
-        <preliquibase.version>1.5.0</preliquibase.version>
     </properties>
     <dependencies>
         <dependency>
@@ -70,11 +69,6 @@
             <groupId>org.liquibase</groupId>
             <artifactId>liquibase-core</artifactId>
             <version>${liquibase.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>net.lbruun.springboot</groupId>
-            <artifactId>preliquibase-spring-boot-starter</artifactId>
-            <version>${preliquibase.version}</version>
         </dependency>
         <dependency>
             <groupId>io.jsonwebtoken</groupId>

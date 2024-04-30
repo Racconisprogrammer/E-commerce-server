@@ -1,18 +1,5 @@
-DROP TABLE IF EXISTS category;
-DROP TABLE IF EXISTS product;
-DROP TABLE IF EXISTS address;
-DROP TABLE IF EXISTS cart;
-DROP TABLE IF EXISTS cart_item;
-DROP TABLE IF EXISTS images;
-DROP TABLE IF EXISTS order_item;
-DROP TABLE IF EXISTS orders;
-DROP TABLE IF EXISTS product_highlights;
-DROP TABLE IF EXISTS rating;
-DROP TABLE IF EXISTS review;
-DROP TABLE IF EXISTS user;
-DROP TABLE IF EXISTS user_payment_information;
-
-
+--liquibase formatted sql
+--changeset admin:sample1_1
 CREATE TABLE IF NOT EXISTS category
 (
     id                 BIGINT AUTO_INCREMENT PRIMARY KEY,
@@ -22,13 +9,13 @@ CREATE TABLE IF NOT EXISTS category
 );
 
 
-
+--changeset admin:sample1_2
 CREATE TABLE IF NOT EXISTS product
 (
     id               BIGINT AUTO_INCREMENT PRIMARY KEY,
     brand            VARCHAR(255)  NULL,
     color            VARCHAR(255)  NULL,
-    created_at       DATETIME(6)   NULL,
+    created_at       DATETIME  NULL,
     description      VARCHAR(1500) NULL,
     details          VARCHAR(1500) NULL,
     discount_percent INT           NULL,
@@ -42,6 +29,7 @@ CREATE TABLE IF NOT EXISTS product
     CONSTRAINT fk_product_category_id FOREIGN KEY (category_id) REFERENCES category (id) ON DELETE CASCADE ON UPDATE NO ACTION
 );
 
+--changeset admin:sample1_3
 CREATE TABLE IF NOT EXISTS images
 (
     id                 BIGINT AUTO_INCREMENT PRIMARY KEY,
@@ -55,6 +43,7 @@ CREATE TABLE IF NOT EXISTS images
     CONSTRAINT fk_images_product_id FOREIGN KEY (product_id) REFERENCES product (id)
 );
 
+--changeset admin:sample1_4
 CREATE TABLE IF NOT EXISTS product_highlights
 (
     product_id BIGINT       NOT NULL,
