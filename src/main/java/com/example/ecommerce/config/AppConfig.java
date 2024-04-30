@@ -46,7 +46,8 @@ public class AppConfig {
                         CorsConfiguration configuration = new CorsConfiguration();
                         configuration.setAllowedOrigins(Arrays.asList(
                                 "http://localhost:3000",
-                                "http://localhost:4200"
+                                "http://localhost:4200",
+                                "https://e-commerce-client-5oai.vercel.app"
                         ));
                         configuration.setAllowedMethods(Collections.singletonList("*"));
                         configuration.setAllowCredentials(true);
