@@ -37,6 +37,7 @@ public class Product {
 
     private String title;
 
+    @Column(length = 2500)
     private String description;
 
     private int price;
@@ -56,7 +57,7 @@ public class Product {
     @Column(name = "color")
     private String color;
 
-    @Column(name = "details")
+    @Column(name = "details", length = 65555)
     private String details;
 
     @Column(length = 65555)
