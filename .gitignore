@@ -6,7 +6,8 @@ target/
 
 ### My Config ###
 .github
-
+Dockerfile
+docker-compose.yaml
 
 ### STS ###
 .apt_generated
