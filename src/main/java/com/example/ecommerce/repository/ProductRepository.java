@@ -26,4 +26,11 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
                                  @Param("sort") String sort
                                  );
 
+    @Query(value = """
+        SELECT p FROM Product p
+        join Category c on c.id = p.category.id
+        where c.name = :categoryName
+    """)
+    List<Product> findProductsByCategoryName(@Param("categoryName") String categoryName);
+
 }

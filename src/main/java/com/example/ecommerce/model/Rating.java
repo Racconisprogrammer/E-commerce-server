@@ -39,7 +39,7 @@ public class Rating {
     private Product product;
 
     @Column(name = "rating")
-    private double rating;
+    private Long rating;
 
     private LocalDateTime createdAt;
 }

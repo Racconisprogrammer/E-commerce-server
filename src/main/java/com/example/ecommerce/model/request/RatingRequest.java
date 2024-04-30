@@ -10,6 +10,6 @@ public class RatingRequest {
 
     private Long productId;
 
-    private double rating;
+    private Long rating;
 
 }

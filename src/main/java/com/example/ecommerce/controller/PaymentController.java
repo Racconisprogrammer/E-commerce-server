@@ -4,6 +4,7 @@ package com.example.ecommerce.controller;
 import com.example.ecommerce.controller.http.response.ApiResponse;
 import com.example.ecommerce.controller.http.response.PaymentLinkResponse;
 import com.example.ecommerce.model.Order;
+import com.example.ecommerce.model.PaymentDetails;
 import com.example.ecommerce.model.exception.OrderException;
 import com.example.ecommerce.repository.OrderRepository;
 import com.example.ecommerce.service.OrderService;
@@ -20,6 +21,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -65,6 +68,7 @@ public class PaymentController {
             String paymentLinkId = paymentLink.get("id");
             String paymentLinkUrl = paymentLink.get("short_url");
 
+
             PaymentLinkResponse response = new PaymentLinkResponse();
             response.setPayment_link_id(paymentLinkId);
             response.setPayment_link_url(paymentLinkUrl);
@@ -76,20 +80,26 @@ public class PaymentController {
         }
     }
 
-    @GetMapping("/payments")
+    @PutMapping("/payments/update/{orderId}")
     public ResponseEntity<ApiResponse> redirect(
-            @RequestParam(name = "payment_id") String paymentId,
-            @RequestParam(name = "order_id") Long orderId
+            @PathVariable Long orderId,
+            @RequestBody PaymentDetails payments
     ) throws OrderException, RazorpayException {
         Order order = orderService.findOrderById(orderId);
         RazorpayClient razorpayClient = new RazorpayClient(apiKey, secretKey);
 
 
         try {
-            Payment payment = razorpayClient.payments.fetch(paymentId);
+            Payment payment = razorpayClient.payments.fetch(payments.getPaymentId());
 
             if (payment.get("status").equals("captured")) {
-                order.getPaymentDetails().setPaymentId(paymentId);
+                order.getPaymentDetails().setPaymentMethod(payment.get("method"));
+                order.setOrderId(payment.get("order_id"));
+                order.getPaymentDetails().setPaymentId(payments.getPaymentId());
+                order.getPaymentDetails().setRazorpayPaymentId(payments.getPaymentId());
+                order.getPaymentDetails().setRazorpayPaymentLinkId(payments.getRazorpayPaymentLinkId());
+                order.getPaymentDetails().setRazorpayPaymentLinkReferenceId(payments.getRazorpayPaymentLinkReferenceId());
+                order.getPaymentDetails().setRazorpayPaymentLinkStatus(payments.getRazorpayPaymentLinkStatus());
                 order.getPaymentDetails().setStatus("COMPLETED");
                 order.setOrderStatus("PLACED");
                 orderRepository.save(order);

@@ -63,6 +63,10 @@ public class OrderController {
 
         Order order = orderService.findOrderById(orderId);
 
+        if (!(user.getId().equals(order.getUser().getId()))) {
+            order = null;
+        }
+
         return new ResponseEntity<>(order, HttpStatus.ACCEPTED);
     }
 

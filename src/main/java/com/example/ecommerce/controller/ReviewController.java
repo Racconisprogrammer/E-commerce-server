@@ -30,7 +30,7 @@ public class ReviewController {
 
     private final UserService userService;
 
-    @PostMapping("/create")
+    @PostMapping("/")
     public ResponseEntity<Review> createReview(
             @RequestBody ReviewRequest request,
             @RequestHeader("Authorization") String jwt

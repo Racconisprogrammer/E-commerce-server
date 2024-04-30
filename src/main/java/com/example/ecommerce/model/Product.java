@@ -5,6 +5,7 @@ import jakarta.persistence.Column;
 import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -58,21 +59,12 @@ public class Product {
     @Column(name = "details")
     private String details;
 
-    @Embedded
-    @ElementCollection
-    @Column(name = "sizes")
-    private Set<Size> sizes = new HashSet<>();
+    @Column(length = 65555)
+    private String highlights;
 
-    @Embedded
-    @ElementCollection
-    @Column(name = "highlights")
-    private Set<Highlights> highlights = new HashSet<>();
-
-    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Images> images = new ArrayList<>();
-
-    @Column(name = "image_url")
-    private String imageUrl;
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "product")
+    private List<ProductImage> images = new ArrayList<>();
+    private Long previewImageId;
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Rating> ratings = new ArrayList<>();
@@ -88,6 +80,11 @@ public class Product {
     private Category category;
 
     private LocalDateTime createdAt;
+
+    public void addImageToProduct(ProductImage image) {
+        image.setProduct(this);
+        images.add(image);
+    }
 
 
 

@@ -17,4 +17,5 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
         OR o.orderStatus = 'SHIPPED' OR o.orderStatus = 'DELIVERED')
     """)
     List<Order> getUsersOrder(@Param("userId") Long userId);
+
 }

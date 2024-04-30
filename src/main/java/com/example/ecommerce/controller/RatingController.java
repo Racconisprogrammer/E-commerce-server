@@ -28,7 +28,7 @@ public class RatingController {
     private final UserService userService;
     private final RatingService ratingService;
 
-    @PostMapping("/api/ratings")
+    @PostMapping("/")
     public ResponseEntity<Rating> createRating(
             @RequestBody RatingRequest request,
             @RequestHeader("Authorization") String jwt

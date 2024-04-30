@@ -20,7 +20,6 @@ public interface CartItemService {
     CartItem isCartItemExist(
             Cart cart,
             Product product,
-            String size,
             Long userId
     );
 
