@@ -47,7 +47,7 @@ public class AppConfig {
                         configuration.setAllowedOrigins(Arrays.asList(
                                 "http://localhost:3000",
                                 "http://localhost:4200",
-                                "https://e-commerce-client-5oai.vercel.app"
+                                "https://e-commerce-client-phi.vercel.app/"
                         ));
                         configuration.setAllowedMethods(Collections.singletonList("*"));
                         configuration.setAllowCredentials(true);
