@@ -8,7 +8,7 @@ spring:
     url: jdbc:mysql://${MYSQLHOST:localhost}:${MYSQLPORT:3306}/${MYSQLDATABASE:ecommerce}
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
-    password: MYSQLPASSWORD
+    password: ZTanSQQDDWEfTSaJcxXMAlnQHtZVSjpD
   jpa:
     hibernate:
       ddl-auto: update
