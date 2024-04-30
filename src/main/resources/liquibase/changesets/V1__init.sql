@@ -61,7 +61,7 @@ CREATE TABLE IF NOT EXISTS images
 CREATE TABLE IF NOT EXISTS user
 (
     id         BIGINT AUTO_INCREMENT PRIMARY KEY,
-    created_at DATETIME(6)  NULL,
+    created_at DATETIME  NULL,
     email      VARCHAR(255) NULL,
     first_name VARCHAR(255) NULL,
     last_name  VARCHAR(255) NULL,
@@ -118,10 +118,10 @@ CREATE TABLE IF NOT EXISTS cart_item
 CREATE TABLE IF NOT EXISTS orders
 (
     id                                 BIGINT AUTO_INCREMENT PRIMARY KEY,
-    create_at                          DATETIME(6)  NULL,
-    delivery_date                      DATETIME(6)  NULL,
+    create_at                          DATETIME  NULL,
+    delivery_date                      DATETIME  NULL,
     discounted                         INT          NULL,
-    order_date                         DATETIME(6)  NULL,
+    order_date                         DATETIME  NULL,
     order_id                           VARCHAR(255) NULL,
     order_status                       VARCHAR(255) NULL,
     payment_id                         VARCHAR(255) NULL,
@@ -145,7 +145,7 @@ CREATE TABLE IF NOT EXISTS orders
 CREATE TABLE IF NOT EXISTS order_item
 (
     id               BIGINT AUTO_INCREMENT PRIMARY KEY,
-    delivery_date    DATETIME(6)  NULL,
+    delivery_date    DATETIME NULL,
     discounted_price INT          NULL,
     price            INT          NULL,
     quantity         INT          NOT NULL,
@@ -161,7 +161,7 @@ CREATE TABLE IF NOT EXISTS order_item
 CREATE TABLE IF NOT EXISTS rating
 (
     id         BIGINT AUTO_INCREMENT PRIMARY KEY,
-    created_at DATETIME(6) NULL,
+    created_at DATETIME NULL,
     rating     BIGINT      NULL,
     product_id BIGINT      NOT NULL,
     user_id    BIGINT      NOT NULL,
@@ -173,7 +173,7 @@ CREATE TABLE IF NOT EXISTS rating
 CREATE TABLE IF NOT EXISTS review
 (
     id         BIGINT AUTO_INCREMENT PRIMARY KEY,
-    create_at  DATETIME(6)  NULL,
+    create_at  DATETIME  NULL,
     review     VARCHAR(255) NULL,
     product_id BIGINT       NULL,
     user_id    BIGINT       NULL,
