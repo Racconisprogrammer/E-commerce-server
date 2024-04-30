@@ -3,9 +3,12 @@ CREATE TABLE IF NOT EXISTS category
     id                 BIGINT AUTO_INCREMENT PRIMARY KEY,
     level              INT         NOT NULL,
     name               VARCHAR(50) NOT NULL,
-    parent_category_id BIGINT      NULL,
-    CONSTRAINT fk_category_parent_category_id FOREIGN KEY (parent_category_id) REFERENCES category (id)
+    parent_category_id BIGINT      NULL
 );
+
+ALTER TABLE category
+ADD CONSTRAINT fk_category_parent_category_id
+FOREIGN KEY (parent_category_id) REFERENCES category (id);
 
 CREATE TABLE IF NOT EXISTS product
 (
