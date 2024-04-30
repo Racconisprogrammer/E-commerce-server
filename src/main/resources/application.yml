@@ -10,7 +10,7 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
 #    username: root
 #    password: 587595
-    url: jdbc:mysql://root:ZTanSQQDDWEfTSaJcxXMAlnQHtZVSjpD@monorail.proxy.rlwy.net:21556/railway
+    url: jdbc:mysql://root:IrYqCbobXggKxaKmlbEwLJbuzceMAPGz@roundhouse.proxy.rlwy.net:23224/railway
 #  jpa:
   liquibase:
     change-log: classpath:liquibase/db.changelog.yaml
