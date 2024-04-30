@@ -13,10 +13,10 @@ spring:
 #    username: root
 #    password: ZTanSQQDDWEfTSaJcxXMAlnQHtZVSjpD
     url: jdbc:mysql://root:ZTanSQQDDWEfTSaJcxXMAlnQHtZVSjpD@monorail.proxy.rlwy.net:21556/railway
-  jpa:
-    hibernate:
-      ddl-auto: update
-    show-sql: true
+#  jpa:
+#    hibernate:
+#      ddl-auto: update
+#    show-sql: true
 
 RAZORPAY_PUBLISHABLE_ID: "rzp_test_Q0QTYcgPygZd5V"
 RAZORPAY_SECRET_KEY: "DCwc8GO9rqJBEPr7SJaiPXxb"

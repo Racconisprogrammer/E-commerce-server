@@ -18,8 +18,8 @@
         <jjwt.version>0.12.5</jjwt.version>
         <lombok.version>1.18.30</lombok.version>
         <razorpay.version>1.4.6</razorpay.version>
-        <liquibase.version>4.26.0</liquibase.version>
-        <preliquibase.version>1.4.0</preliquibase.version>
+        <liquibase.version>4.27.0</liquibase.version>
+        <preliquibase.version>1.5.0</preliquibase.version>
     </properties>
     <dependencies>
         <dependency>
