@@ -24,7 +24,7 @@ CREATE TABLE IF NOT EXISTS product
     category_id      BIGINT        NULL,
     preview_image_id BIGINT        NULL,
     highlights       VARCHAR(1500) NULL,
-    CONSTRAINT fk_product_category_id FOREIGN KEY (category_id) REFERENCES category (id)
+    CONSTRAINT fk_product_category_id FOREIGN KEY (category_id) REFERENCES category (id) ON DELETE CASCADE ON UPDATE NO ACTION
 );
 
 CREATE TABLE IF NOT EXISTS images
