@@ -57,10 +57,10 @@ public class Product {
     @Column(name = "color")
     private String color;
 
-    @Column(name = "details", columnDefinition = "LONGTEXT")
+    @Column(name = "details", length = 4096)
     private String details;
 
-    @Column(columnDefinition = "LONGTEXT")
+    @Column(length = 4096)
     private String highlights;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "product")
